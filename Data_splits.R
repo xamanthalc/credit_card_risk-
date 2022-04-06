@@ -1,5 +1,6 @@
 #Libraries needed ----
 
+library(tidyverse)
 library(tidymodels)
 library(readr)
 library(janitor)
@@ -20,6 +21,25 @@ credit_rest <- credit_first_split %>% training()
 
 save(credit_eda, file = "datasets/credit_eda.rda")
 save(credit_rest, file = "datasets/credit_rest.rda")
+
+#Data wrangling ----
+
+credit_rest <- credit_rest %>% 
+  mutate(gender = factor(gender),
+         own_car = factor(own_car),
+         own_property = factor(own_property),
+         work_phone = factor(work_phone),
+         phone = factor(phone),
+         email = factor(email),
+         unemployed = factor(unemployed),
+         income_type = factor(income_type),
+         education_type = factor(education_type),
+         family_status = factor(family_status),
+         housing_type = factor(housing_type),
+         occupation_type = factor(occupation_type),
+         target = factor(target))
+
+
 
 #Training-testing split ----
 credit_modeling <- credit_rest %>% 
